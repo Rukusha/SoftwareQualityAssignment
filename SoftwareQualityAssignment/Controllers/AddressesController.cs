@@ -11,7 +11,7 @@ namespace SoftwareQualityAssignment.Controllers
 {
     [ApiController]
     [Route("api/Addresses")]
-    public class AddressesController
+    public class AddressesController: ControllerBase
     {
         private readonly Database _database;
         public AddressesController(Database database)
@@ -25,9 +25,5 @@ namespace SoftwareQualityAssignment.Controllers
             return Ok(Addresses);
         }
 
-        private IActionResult Ok(IEnumerable<Addresses> addresses)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
