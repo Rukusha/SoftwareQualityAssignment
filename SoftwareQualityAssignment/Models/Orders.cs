@@ -11,7 +11,7 @@ namespace SoftwareQualityAssignment.models
         public int CustomerID { get; set; }
         public string CreatedDate { get; set; }
         public string PaymentPaidDate { get; set; }
-        public string DispachedDate { get; set; }
+        public string DispatchedDate { get; set; }
 
     }
 }

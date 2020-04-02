@@ -28,7 +28,7 @@ namespace SoftwareQualityAssignment
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
+            services.AddMvc();
             IConfigurationSection configurationSection = Configuration.GetSection("ConnectionStrings:Database");
             services.AddDbContext<Database>(x => x.UseSqlServer(configurationSection.Value));
         }
@@ -47,9 +47,16 @@ namespace SoftwareQualityAssignment
 
             app.UseAuthorization();
 
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //    endpoints.MapControllers();
+            //});
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
