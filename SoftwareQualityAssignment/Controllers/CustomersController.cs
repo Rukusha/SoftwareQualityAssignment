@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
-using SoftwareQualityAssignment.models;
+using Microsoft.EntityFrameworkCore;
+using SoftwareQualityAssignment.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,7 @@ namespace SoftwareQualityAssignment.Controllers
         [HttpGet]
         public IActionResult GetAllCustomers()
         {
-
-            IEnumerable<Customers> Customers = _database.Customers.ToList();
+            IEnumerable<Customer> Customers = _database.Customers.Include(x => x.Addresses).ToList();
             return Ok(Customers);
         }
 

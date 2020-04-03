@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
-using SoftwareQualityAssignment.models;
+using Microsoft.EntityFrameworkCore;
+using SoftwareQualityAssignment.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +12,17 @@ namespace SoftwareQualityAssignment.Controllers
 {
     [ApiController]
     [Route("api/Orders")]
-    public class OrdersController : ControllerBase
+    public class OrderController : ControllerBase
     {
         private readonly Database _database;
-        public OrdersController(Database database)
+        public OrderController(Database database)
         {
             _database = database ?? throw new ArgumentNullException(nameof(database));
         }
         [HttpGet]
         public IActionResult GetAllOrders()
         {
-            IEnumerable<Orders> Orders = _database.Orders.ToList();
+            IEnumerable<Order> Orders = _database.Orders.Include(x => x.OrderLines).ThenInclude(x => x.Product).ToList();
             return Ok(Orders);
         }
 

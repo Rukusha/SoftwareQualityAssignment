@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SoftwareQualityAssignment.models;
+using SoftwareQualityAssignment.Models;
 
 namespace SoftwareQualityAssignment
 {
@@ -28,7 +28,7 @@ namespace SoftwareQualityAssignment
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddMvc();
+            services.AddRouting();
             IConfigurationSection configurationSection = Configuration.GetSection("ConnectionStrings:Database");
             services.AddDbContext<Database>(x => x.UseSqlServer(configurationSection.Value));
         }
@@ -47,16 +47,9 @@ namespace SoftwareQualityAssignment
 
             app.UseAuthorization();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //    endpoints.MapControllers();
-            //});
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

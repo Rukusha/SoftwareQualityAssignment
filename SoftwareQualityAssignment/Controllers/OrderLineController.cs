@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
-using SoftwareQualityAssignment.models;
+using SoftwareQualityAssignment.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +21,7 @@ namespace SoftwareQualityAssignment.Controllers
         [HttpGet]
         public IActionResult GetAllOrderLines()
         {
-            IEnumerable<OrderLines> OrderLines = _database.OrderLines.ToList();
+            IEnumerable<OrderLine> OrderLines = _database.OrderLines.ToList();
             return Ok(OrderLines);
         }
 

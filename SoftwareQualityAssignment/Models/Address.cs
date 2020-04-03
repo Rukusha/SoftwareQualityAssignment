@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SoftwareQualityAssignment.models
+namespace SoftwareQualityAssignment.Models
 {
-    public class Addresses
+    public class Address
     {
         public int ID { get; set; }
-        public int CustomerID { get; set; }
+        public int? CustomerID { get; set; }
         public string Street { get; set; }
         public string CityTown { get; set; }
         public string County { get; set; }
