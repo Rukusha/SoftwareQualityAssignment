@@ -22,12 +22,34 @@ namespace SoftwareQualityAssignment.Controllers
         [HttpGet]
         public IActionResult GetAllOrders()
         {
+
+            List<OrderTotal> orderTotals = new List<OrderTotal>();
+
             IEnumerable<Order> Orders = _database.Orders.Include(x => x.OrderLines).ThenInclude(x => x.Product).Include(x => x.Customers)
                 .OrderBy(x => x.Customers)
                 .ToList();
+            foreach( Order item in Orders)
+            {
+                OrderTotal individualOrder = new OrderTotal();
 
-            //IEnumerable<Order> Orders = _database.Orders.Include(x => x.OrderLines).ThenInclude(x => x.Product).ToList();
-            return Ok(Orders);
+                individualOrder.FirstName = item.Customers.FirstName;
+                individualOrder.LastName = item.Customers.LastName;
+
+                individualOrder.CreatedDate = item.CreatedDate;
+                individualOrder.OrderLines = item.OrderLines;
+
+                decimal? total = 0;
+
+                foreach (OrderLine orderlines in item.OrderLines)
+                {
+                    
+                    total += orderlines.Product.Price;
+                }
+                individualOrder.Price = total;
+                orderTotals.Add(individualOrder);
+            }
+
+            return Ok(orderTotals);
         }
 
     }
