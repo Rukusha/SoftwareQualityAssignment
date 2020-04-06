@@ -12,5 +12,6 @@ namespace SoftwareQualityAssignment.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public decimal? Price { get; set; }
+        public List<decimal?> SubTotal { get; set; }
     }
 }

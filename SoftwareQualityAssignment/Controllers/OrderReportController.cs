@@ -39,13 +39,19 @@ namespace SoftwareQualityAssignment.Controllers
                 individualOrder.OrderLines = item.OrderLines;
 
                 decimal? total = 0;
+                decimal? Sub = 0;
+                List<decimal?> SubTotal = new List<decimal?>();
+
 
                 foreach (OrderLine orderlines in item.OrderLines)
                 {
-                    
-                    total += orderlines.Product.Price;
+                     Sub = orderlines.Quantity * orderlines.Product.Price;
+                     total +=  Sub;
+                     SubTotal.Add(Sub);
+
                 }
                 individualOrder.Price = total;
+                individualOrder.SubTotal = SubTotal;
                 orderTotals.Add(individualOrder);
             }
 
